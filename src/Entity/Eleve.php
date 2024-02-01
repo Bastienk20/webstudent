@@ -28,6 +28,13 @@ class Eleve
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $surnom = null;
 
+    #[ORM\ManyToOne(inversedBy: 'eleves')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Maison $Maison = null;
+
+    #[ORM\ManyToOne(inversedBy: 'eleves')]
+    private ?Note $notes = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -77,6 +84,30 @@ class Eleve
     public function setSurnom(?string $surnom): static
     {
         $this->surnom = $surnom;
+
+        return $this;
+    }
+
+    public function getMaison(): ?Maison
+    {
+        return $this->Maison;
+    }
+
+    public function setMaison(?Maison $Maison): static
+    {
+        $this->Maison = $Maison;
+
+        return $this;
+    }
+
+    public function getNotes(): ?Note
+    {
+        return $this->notes;
+    }
+
+    public function setNotes(?Note $notes): static
+    {
+        $this->notes = $notes;
 
         return $this;
     }
